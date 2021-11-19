@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
@@ -121,7 +122,8 @@ export default function SignUp() {
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-full bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm">
-            Already have am account?{` `}
+            Already have am account?
+            {' '}
             <Link to={ROUTES.LOGIN} className="font-bold text-blue-medium">
               Log in
             </Link>

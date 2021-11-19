@@ -1,9 +1,9 @@
-import { memo } from 'react';
+/* eslint-disable no-unused-expressions */
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 
-const User = ({ username, fullName }) =>
+export default function User({ username, fullName }) {
   !username || !fullName ? (
     <Skeleton count={1} height={61} />
   ) : (
@@ -19,11 +19,9 @@ const User = ({ username, fullName }) =>
         <p className="font-bold text-sm">{username}</p>
         <p className="text-sm">{fullName}</p>
       </div>
-      <p>{username}</p>
     </Link>
   );
-
-export default User;
+}
 
 User.propTypes = {
   username: PropTypes.string.isRequired,
