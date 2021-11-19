@@ -2,17 +2,20 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
+import SuggestedProfile from './suggested-profile';
 
-export default function Suggestions({ userId }) {
+export default function Suggestions({ userId, following, loggedInUserdocId }) {
   const [profiles, setProfiles] = useState(null);
 
   useEffect(() => {
     async function suggestedProfiles() {
-      const response = await getSuggestedProfiles(userId);
+      const response = await getSuggestedProfiles(userId, following);
       setProfiles(response);
     }
 
-    suggestedProfiles();
+    if (userId) {
+      suggestedProfiles();
+    }
   }, [userId]);
 
   // eslint-disable-next-line no-nested-ternary
@@ -23,10 +26,23 @@ export default function Suggestions({ userId }) {
       <div className="text-sm flex items-center align-items justify-between mb-2">
         <p className="font-bold text-gray-base">Suggestions for you</p>
       </div>
+      <div className="mt-4 grid gap-5">
+        {profiles.map((profile) => {
+          <SuggestedProfile
+          key={profile.docId}
+          spDocId={profile.docId}
+          username={profile.username}
+          profileId={profile.userId}
+          userId={userId}
+          loggedInUserdocId={loggedInUserdocId}
+        })}
+      </div>
     </div>
   ) : null;
 }
 
 Suggestions.propTypes = {
-  userId: PropTypes.string
+  userId: PropTypes.string,
+  following: PropTypes.array,
+  loggedInUserdocId: PropTypes.string
 };
