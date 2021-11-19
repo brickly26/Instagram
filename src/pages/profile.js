@@ -4,7 +4,6 @@ import { getUserByUsername } from '../services/firebase';
 import * as ROUTES from '../constants/routes';
 import Header from '../components/header';
 import UserProfile from '../components/profile';
-import { setISOWeekYear } from 'date-fns';
 
 export default function Profile() {
   const { username } = useParams();

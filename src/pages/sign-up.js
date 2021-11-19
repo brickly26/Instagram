@@ -22,7 +22,7 @@ export default function SignUp() {
 
     const usernameExists = await doesUsernameExist(username);
 
-    if (usernameExists.length === 0) {
+    if (!usernameExists) {
       try {
         const createdUserResult = await firebase
           .auth()
@@ -38,6 +38,7 @@ export default function SignUp() {
           fullName,
           emailAddress: emailAddress.toLowerCase(),
           following: [],
+          followers: [],
           dateCreated: Date.now()
         });
 
@@ -45,7 +46,6 @@ export default function SignUp() {
       } catch (error) {
         setFullName('');
         setEmailAddress('');
-        setUsername('');
         setPassword('');
         setError(error.message);
         setTimeout(() => {
@@ -53,6 +53,7 @@ export default function SignUp() {
         }, 3000);
       }
     } else {
+      setUsername('');
       setError('That username is already taken, please try another.');
       setTimeout(() => {
         setError('');

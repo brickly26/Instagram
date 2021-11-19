@@ -1,10 +1,13 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-nested-ternary */
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './suggested-profile';
 
-export default function Suggestions({ userId, following, loggedInUserdocId }) {
+export default function Suggestions({ userId, following, loggedInUserDocId }) {
   const [profiles, setProfiles] = useState(null);
 
   useEffect(() => {
@@ -29,12 +32,13 @@ export default function Suggestions({ userId, following, loggedInUserdocId }) {
       <div className="mt-4 grid gap-5">
         {profiles.map((profile) => {
           <SuggestedProfile
-          key={profile.docId}
-          spDocId={profile.docId}
-          username={profile.username}
-          profileId={profile.userId}
-          userId={userId}
-          loggedInUserdocId={loggedInUserdocId}
+            key={profile.docId}
+            profileDocId={profile.docId}
+            username={profile.username}
+            profileId={profile.userId}
+            userId={userId}
+            loggedInUserDocId={loggedInUserDocId}
+          />;
         })}
       </div>
     </div>
@@ -44,5 +48,5 @@ export default function Suggestions({ userId, following, loggedInUserdocId }) {
 Suggestions.propTypes = {
   userId: PropTypes.string,
   following: PropTypes.array,
-  loggedInUserdocId: PropTypes.string
+  loggedInUserDocId: PropTypes.string
 };
