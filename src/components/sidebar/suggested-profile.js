@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { updateFollewedUserFollowers, updateLoggedInUserFollowing } from '../../services/firebase'
+import { updateFollowedUserFollowers, updateLoggedInUserFollowing } from '../../services/firebase'
 
 export default function SuggestedProfile({
   spDocId,
@@ -17,7 +17,7 @@ export default function SuggestedProfile({
 
     await updateLoggedInUserFollowing(loggedInUserDocId, profileId);
 
-    await updateFollewedUserFollowers(spDocId, userId)
+    await updateFollowedUserFollowers(spDocId, userId)
 
   }
 
